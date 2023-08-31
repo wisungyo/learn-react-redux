@@ -3,14 +3,16 @@ import {
     RESTOCK_ICECREAM
 } from "./iceCreamTypes";
 
-export const buyIceCream = () => {
+export const buyIceCream = (number = 1) => {
     return {
-        type: BUY_ICECREAM
+        type: BUY_ICECREAM,
+        payload: number
     }
 }
 
-export const restockIceCream = () => {
+export const restockIceCream = (number = 1) => {
     return {
-        type: RESTOCK_ICECREAM
+        type: RESTOCK_ICECREAM,
+        payload: number
     }
 }

@@ -7,13 +7,13 @@ function HooksIceCreamContainer() {
 
     const dispatch = useDispatch()
     const toBuyIceCream = () => dispatch(buyIceCream())
-    const toRestockCake = () => dispatch(restockIceCream())
+    const toRestockIceCream = () => dispatch(restockIceCream())
 
     return (
         <div>
             <h2>Number of Ice Cream (Hooks)- {numOfIceCream}</h2>
             <button onClick={() => toBuyIceCream()}>Buy Ice Cream</button>
-            <button onClick={() => toRestockCake()}>Restock Ice Cream</button>
+            <button onClick={() => toRestockIceCream()}>Restock Ice Cream</button>
         </div>
     )
 }

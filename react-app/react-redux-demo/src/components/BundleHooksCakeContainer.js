@@ -1,0 +1,45 @@
+import React, { useState } from 'react'
+import { buyCake, restockCake } from '../redux/cake/cakeActions'
+import { useSelector, useDispatch } from 'react-redux'
+
+function BundleHooksCakeContainer(props) {
+    const [number, setNumber] = useState(1)
+    const numOfCakes = useSelector(state => state.cake.numOfCakes)
+
+    const dispatch = useDispatch()
+
+    const toBuyCake = () => {
+        if (!number) return
+        dispatch(buyCake(number))
+    }
+
+    const toRestockCake = () => {
+        if (!number) return
+        dispatch(restockCake(number))
+    }
+
+    const handleNumberChange = (event) => {
+        const input = event.target.value
+        const parsedInput = parseInt(input, 10) // parse as base 10
+        setNumber(parsedInput);
+    }
+
+    const isValidNumber = () => {
+        return !isNaN(number) ? number : ''
+    }
+
+    return (
+        <div>
+            <h2>Number of Cakes (Hooks) - {numOfCakes}</h2>
+            <input
+                type='number'
+                value={number}
+                onChange={handleNumberChange}
+            />
+            <button onClick={toBuyCake}>Buy {isValidNumber()} Cake</button>
+            <button onClick={toRestockCake}>Restock {isValidNumber()} Cake</button>
+        </div>
+    )
+}
+
+export default BundleHooksCakeContainer

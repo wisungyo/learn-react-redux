@@ -7,21 +7,38 @@ const initialState = {
     numOfIceCream: 20
 }
 
+const handleBuyIceCream = (state, action) => {
+    const result = state.numOfIceCream - action.payload
+
+    if (result >= 0) {
+        return {
+            numOfIceCream: result
+        }
+    } else {
+        return state
+    }
+}
+
+const handleRestockIceCream = (state, action) => {
+    const result = state.numOfIceCream + action.payload
+
+    // prevent addition by minus value (2 + (-5) = -3)
+    if (result >= 0) {
+        return {
+            numOfIceCream: result
+        }
+    } else {
+        return state
+    }
+}
+
 const iceCreamReducer = (state = initialState, action) => {
     switch (action.type) {
         case BUY_ICECREAM:
-            if (state.numOfIceCream > 0) {
-                return {
-                    numOfIceCream: state.numOfIceCream - 1
-                }
-            } else {
-                return state
-            }
+            return handleBuyIceCream(state, action)
 
         case RESTOCK_ICECREAM:
-            return {
-                numOfIceCream: state.numOfIceCream + 1
-            }
+            return handleRestockIceCream(state, action)
 
         default:
             return state
